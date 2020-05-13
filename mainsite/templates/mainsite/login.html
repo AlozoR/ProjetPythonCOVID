@@ -1,0 +1,17 @@
+<h1>Connexion</h1>
+
+{% if error %}
+<p><strong>Identifiants incorrects</strong></p>
+{% endif %}
+
+{% if user.is_authenticated %}
+Vous êtes connecté, {{ user.username }} !
+{% else %}
+<form method="post" action="{% url 'mainsite:bravo' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Se connecter">
+</form>
+{% endif %}
+
+<a href="{% url 'mainsite:inscription' %}">Inscription</a>
