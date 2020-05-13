@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 
 class Foyer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    adresse = models.TextField(max_length=100)
-    ville = models.TextField(max_length=50)
+    adresse = models.CharField(max_length=100)
+    ville = models.CharField(max_length=50)
     est_une_residence = models.BooleanField(default=True)
+    telephone = models.CharField(max_length=15, null=True)
     habitants = models.TextField(max_length=1000)
 
     def __str__(self):
