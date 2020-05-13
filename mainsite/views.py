@@ -2,11 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.contrib.auth import authenticate, login
+
 import logging
 
 from .models import Foyer
 from django.contrib.auth.models import User
-from .forms import SignInForm
+from .forms import SignInForm, LogInForm
 
 
 logger = logging.getLogger(__name__)
@@ -37,7 +39,7 @@ def inscription(request):
                           habitants=habitants)
             user.save()
             foyer.save()
-            return HttpResponseRedirect(reverse('mainsite:bravo'))
+            return HttpResponseRedirect(reverse('mainsite:connexion'))
 
     else:
         form = SignInForm
@@ -48,5 +50,26 @@ def inscription(request):
     return render(request, 'mainsite/sign_in.html', context)
 
 
+def connexion(request):
+    error = False
+
+    if request.method == 'POST':
+        form = LogInForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                login(request, user)
+            else:
+                error = True
+
+    else:
+        form = LogInForm()
+
+    context = locals()
+    return render(request, 'mainsite/login.html', context)
+
+
 def succes_inscription(request):
-    return HttpResponse('inscription terminée')
+    return HttpResponse('connexion terminée')
