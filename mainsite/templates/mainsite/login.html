@@ -5,9 +5,10 @@
 {% endif %}
 
 {% if user.is_authenticated %}
-Vous êtes connecté, {{ user.username }} !
+    Vous êtes connecté, {{ user.username }} !
+    <a href="{% url 'commande' %}">Accéder au site</a>
 {% else %}
-<form method="post" action="{% url 'mainsite:bravo' %}">
+<form method="post" action="{% url 'mainsite:commande' %}">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Se connecter">
