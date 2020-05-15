@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.utils import timezone
 
 import logging
 
-from .models import Foyer
+from .models import Foyer, Commande
 from django.contrib.auth.models import User
 from .forms import SignInForm, LogInForm
 
@@ -71,5 +72,29 @@ def connexion(request):
     return render(request, 'mainsite/login.html', context)
 
 
-def succes_inscription(request):
-    return HttpResponse('connexion terminée')
+def menu_commande(request):
+    if request.method == 'POST':
+        form = SignInForm(request.POST)
+        if form.is_valid():
+            # TODO: récupérer les données sur form.cleaned_data
+            commande = Commande(date=timezone.now())
+            # for f in form.fields:
+
+            return HttpResponseRedirect(reverse('mainsite:bravo'))
+
+    else:
+        form = SignInForm
+
+    context = {
+        'form': form
+    }
+    return render(request, 'mainsite/mainmenu.html', context)
+
+
+def deconnexion(request):
+    logout(request)
+    return redirect(reverse('mainsite:connexion'))
+
+
+def succes_commande():
+    HttpResponse('Commande passée')

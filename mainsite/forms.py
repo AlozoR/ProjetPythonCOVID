@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import Foyer
+from .models import Foyer, Produit
 
 
 class SignInForm(forms.Form):
@@ -48,3 +48,40 @@ class SignInForm(forms.Form):
 class LogInForm(forms.Form):
     username = forms.CharField(label='username', max_length=32)
     password = forms.CharField(label='mot de passe', widget=forms.PasswordInput)
+
+
+class CommandeProduitForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        super(CommandeProduitForm, self).__init__(*args, **kwargs)
+        produits = Produit.objects.all()
+        produits = [p.nom for p in produits if p.est_disponible]
+        for i, p in produits:
+            self.fields[f'{i}_field'] = forms.BooleanField(label=p)
+
+    # for i in BDD:
+    #     field = forms.BooleanField(label=i.name)
+    # oeufs = forms.BooleanField(label='oeuf')
+    # pates = forms.BooleanField(label='pâtes')
+    # sucre = forms.BooleanField(label='sucre')
+    # riz = forms.BooleanField(label='riz')
+    # huile = forms.BooleanField(label='huile')
+    # eau = forms.BooleanField(label='eau')
+    # farine = forms.BooleanField(label='farine')
+    # papier_toilette = forms.BooleanField(label='papier toilette')
+    # savon = forms.BooleanField(label='savon')
+    # serviettes = forms.BooleanField(label='serviettes hygiéniques')
+    # pack_conserves = forms.BooleanField(label='pack de conserves')
+    # gel_hydro = forms.BooleanField(label='gel hydroalcoolique')
+    # masques = forms.BooleanField(label='masques')
+    # beurre = forms.BooleanField(label='beurre')
+    # lait = forms.BooleanField(label='lait')
+    # yaourt = forms.BooleanField(label='yaourts')
+    # steak = forms.BooleanField(label='steaks hachés')
+    # volaille = forms.BooleanField(label='volaille')
+    # sel_poivre = forms.BooleanField(label='sel et poivre')
+    # charcuterie = forms.BooleanField(label='charcuterie')
+    # pack_legumes = forms.BooleanField(label='pack de légumes')
+    # pack_fruits = forms.BooleanField(label='pack de fruits')
+    # pain = forms.BooleanField(label='pain')
+    # vin = forms.BooleanField(label='vin')
+    # pack_fromage = forms.BooleanField(label='pack de fromage')

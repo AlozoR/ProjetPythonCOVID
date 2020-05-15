@@ -1,0 +1,9 @@
+<h1>Menu principal</h1>
+
+<form action="{% url 'mainsite:connexion' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Valider">
+</form>
+
+<a href="{% url 'mainsite:deconnexion' %}">Déconnexion</a>
