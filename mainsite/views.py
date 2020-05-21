@@ -9,7 +9,7 @@ import logging
 
 from .models import Foyer, Commande
 from django.contrib.auth.models import User
-from .forms import SignInForm, LogInForm
+from .forms import SignInForm, LogInForm, CommandeProduitForm
 
 
 logger = logging.getLogger(__name__)
@@ -76,7 +76,7 @@ def connexion(request):
 
 def menu_commande(request):
     if request.method == 'POST':
-        form = SignInForm(request.POST)
+        form = CommandeProduitForm(request.POST)
         if form.is_valid():
             # TODO: récupérer les données sur form.cleaned_data
             commande = Commande(date=timezone.now())
@@ -85,7 +85,7 @@ def menu_commande(request):
             return HttpResponseRedirect(reverse('mainsite:bravo'))
 
     else:
-        form = SignInForm
+        form = CommandeProduitForm
 
     context = {
         'form': form
