@@ -16,6 +16,7 @@ class SignInForm(forms.Form):
     confirmer_mot_de_passe = forms.CharField(widget=forms.PasswordInput, label='confirmer le mot de passe', max_length=64)
     est_une_residence = forms.ChoiceField(label='type habitat', choices=[('1', 'residence'), ('0', 'maison')])
     habitants = forms.CharField(label='autres habitants', widget=forms.Textarea, max_length=1000, required=False)
+    informations_appartement = forms.CharField(label='information_appartement',max_length=50)
 
     def clean(self):
         cleaned_data = super(SignInForm, self).clean()
@@ -24,6 +25,7 @@ class SignInForm(forms.Form):
         telephone = cleaned_data.get('telephone')
         username = cleaned_data.get('username')
         mail = cleaned_data.get('mail')
+
         if mot_de_passe and confirmer_mot_de_passe:
             if not confirmer_mot_de_passe == mot_de_passe:
                 raise forms.ValidationError('Les mots de passe ne sont pas identiques')

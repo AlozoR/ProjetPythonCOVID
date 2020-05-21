@@ -30,6 +30,7 @@ def inscription(request):
             mot_de_passe = form.cleaned_data['mot_de_passe']
             habitants = form.cleaned_data['habitants']
             est_une_residence = form.cleaned_data['est_une_residence']
+            informations_appartement= form.cleaned_data['informations_appartement']
             user = User.objects.create_user(username=username, email=mail,
                                             password=mot_de_passe)
             user.last_name = nom
@@ -37,7 +38,8 @@ def inscription(request):
             temp = int(est_une_residence)
             foyer = Foyer(user=user, adresse=adresse, ville=ville,
                           est_une_residence=temp, telephone=telephone,
-                          habitants=habitants)
+                          habitants=habitants,
+                          informations_appartement=informations_appartement)
             user.save()
             foyer.save()
             return HttpResponseRedirect(reverse('mainsite:connexion'))
