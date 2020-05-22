@@ -1,9 +1,19 @@
-<h1>Menu principal</h1>
+{% load static %}
 
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Valider">
-</form>
+<head>
+    <link href="{% static 'accueil.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'form.css' %}" rel="stylesheet" type="text/css" media="all" />
+</head>
 
-<a href="{% url 'mainsite:deconnexion' %}">Déconnexion</a>
+<body>
+    <h1>Menu principal</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Valider">
+    </form>
+
+    <a href="{% url 'mainsite:deconnexion' %}">Déconnexion</a>
+</body>
+

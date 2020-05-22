@@ -2,23 +2,30 @@
 
 <head>
     <link href="{% static 'accueil.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'form.css' %}" rel="stylesheet" type="text/css" media="all" />
 </head>
 
-<h1>Connexion</h1>
 
-{% if error %}
-<p><strong>Identifiants incorrects</strong></p>
-{% endif %}
+<body>
+    <h1>Connection</h1>
 
-{% if user.is_authenticated %}
-    Vous êtes connecté, {{ user.username }} !
-    <a href="{% url 'mainsite:commande' %}">Accéder au site</a>
-{% else %}
-<form method="post" action="">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Se connecter">
-</form>
-{% endif %}
+    {% if error %}
+    <p><strong>Identifiants incorrects</strong></p>
+    {% endif %}
 
-<a href="{% url 'mainsite:inscription' %}">Inscription</a>
+    {% if user.is_authenticated %}
+        Vous êtes connecté, {{ user.username }} !
+        <a href="{% url 'mainsite:commande' %}">Accéder au site</a>
+    {% else %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Se connecter">
+    </form>
+    {% endif %}
+
+    <a href="/mainsite/signin"> Inscription </a>
+    <a href="/mainsite"> Accueil </a>
+</body>
+
+
