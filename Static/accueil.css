@@ -10,6 +10,7 @@ h1, h2, h3 {
 
 p {
     color: black;
+    text-align: center;
 }
 
 a{
@@ -32,4 +33,9 @@ body {
 nav ul li {
     padding-top:  20px;
     padding-bottom: 20px;
+}
+
+nav{
+    display: inline-block;
+    text-align: center;
 }
