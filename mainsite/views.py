@@ -127,5 +127,6 @@ def deconnexion(request):
     return redirect(reverse('mainsite:connexion'))
 
 
-def succes_commande():
+def succes_commande(request):
    HttpResponse('Commande passée')
+   return HttpResponseRedirect(reverse('mainsite:connexion'))
