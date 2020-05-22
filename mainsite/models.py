@@ -30,3 +30,5 @@ class Commande(models.Model):
     prix_total = models.FloatField()
     produits = models.ManyToManyField(Produit)
 
+    def __str__(self):
+        return f'Commande de {self.foyer.user.first_name} {self.foyer.user.last_name} fait à {self.date} comprenant {self.produits.nom} pour un total de {self.prix_total}'

@@ -58,9 +58,9 @@ class CommandeProduitForm(forms.Form):
         produits = Produit.objects.all()
         produits = [p.nom for p in produits if p.est_disponible]
         for p in produits:
-            self.fields[p] = forms.BooleanField()
+            self.fields[p] = forms.BooleanField(initial=False, required=False)
 
-        # for i in BDD:
+        # for i in BDD:s
         #     field = forms.BooleanField(label=i.name)
         # oeufs = forms.BooleanField(label='oeuf')
         # pates = forms.BooleanField(label='pâtes')
