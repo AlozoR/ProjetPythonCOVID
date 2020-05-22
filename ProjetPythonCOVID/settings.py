@@ -26,6 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['192.168.1.83', '127.0.0.1', 'localhost']
 
+STATICFILES_DIRS = ["Static"
+                    ]
+
 # Application definition
 
 INSTALLED_APPS = [

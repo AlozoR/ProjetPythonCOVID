@@ -15,6 +15,10 @@ from .forms import SignInForm, LogInForm
 logger = logging.getLogger(__name__)
 
 
+def accueil(request):
+    return render(request, "mainsite/accueil.html")
+
+
 def inscription(request):
     if request.method == 'POST':
         form = SignInForm(request.POST)
@@ -30,7 +34,7 @@ def inscription(request):
             mot_de_passe = form.cleaned_data['mot_de_passe']
             habitants = form.cleaned_data['habitants']
             est_une_residence = form.cleaned_data['est_une_residence']
-            informations_appartement= form.cleaned_data['informations_appartement']
+            informations_appartement = form.cleaned_data['informations_appartement']
             user = User.objects.create_user(username=username, email=mail,
                                             password=mot_de_passe)
             user.last_name = nom

@@ -1,3 +1,9 @@
+{% load static %}
+
+<head>
+    <link href="{% static 'Test.css'%}"   rel="stylesheet" type="text/css" media="all" />
+</head>
+
 <h1>Connexion</h1>
 
 {% if error %}
@@ -16,3 +22,6 @@
 {% endif %}
 
 <a href="{% url 'mainsite:inscription' %}">Inscription</a>
+
+<div id="SMC" class="container" style="text-align: center"><img src="{% static 'SMC.jpg'%}" width="369" height="135" alt=""/>
+            </div>
