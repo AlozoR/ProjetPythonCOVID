@@ -29,3 +29,4 @@ class Commande(models.Model):
     date = models.DateTimeField()
     prix_total = models.FloatField()
     produits = models.ManyToManyField(Produit)
+

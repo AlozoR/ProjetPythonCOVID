@@ -82,7 +82,7 @@ def menu_commande(request):
     if request.method == 'POST':
         form = CommandeProduitForm(request.POST)
         if form.is_valid():
-            # TODO: récupérer les données sur form.cleaned_data
+            habitants = form.cleaned_data['habitants']
             commande = Commande(date=timezone.now())
             # for f in form.fields:
 
