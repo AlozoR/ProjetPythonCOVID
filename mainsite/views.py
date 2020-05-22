@@ -84,23 +84,29 @@ def menu_commande(request):
         form = CommandeProduitForm(request.POST)
         if form.is_valid():
 
-            id=request.user.id
-            foyer=Foyer.objects.get(id=id)
+            user=request.user
+            foyer=Foyer.objects.get(user=user)
             # user=User()
             # foyer=Foyer(user=user, adresse=foyer.adresse, ville=foyer.ville,
             # est_une_residence=foyer.est_une_residence, telephone=foyer.telephone,
             # habitants=foyer.habitants,
             # informations_appartement=foyer.informations_appartement)
             produits = Produit.objects.all()
-            produits = [p for p in produits if p.est_disponible]
-            my_products = list()
-            prix_total = 0
-            for i in range(0,len(produits)):
-                if form.cleaned_data[produits[i].nom]:
-                    my_products.append(produits[i])
-                    prix_total = prix_total + produits[i].prix
+            produits=[p for p in produits if p.est_disponible]
 
-            commande = Commande(foyer=foyer, date=timezone.now(), prix_total=prix_total, produits=my_products)
+
+            prix_total = 0
+            commande = Commande.objects.create(foyer=foyer, date=timezone.now(),prix_total=0)
+            for i in range(0,len(produits)):
+                if form.cleaned_data[produits[i].nom] is None:
+                    break
+                if form.cleaned_data[produits[i].nom]:
+
+                    prix_total = prix_total + produits[i].prix
+                    commande.produits.add(produits[i])
+
+            commande.prix_total=prix_total
+
 
 
             commande.save()
@@ -122,4 +128,4 @@ def deconnexion(request):
 
 
 def succes_commande():
-    HttpResponse('Commande passée')
+   HttpResponse('Commande passée')
