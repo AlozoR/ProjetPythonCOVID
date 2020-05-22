@@ -12,9 +12,9 @@
 
 {% if user.is_authenticated %}
     Vous êtes connecté, {{ user.username }} !
-    <a href="{% url 'commande' %}">Accéder au site</a>
+    <a href="{% url 'mainsite:commande' %}">Accéder au site</a>
 {% else %}
-<form method="post" action="{% url 'mainsite:commande' %}">
+<form method="post" action="">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Se connecter">
