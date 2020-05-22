@@ -7,12 +7,13 @@ from django.utils import timezone
 
 import logging
 
-from .models import Foyer, Commande
+from .models import Foyer, Commande,Produit
 from django.contrib.auth.models import User
 from .forms import SignInForm, LogInForm, CommandeProduitForm
 
 
 logger = logging.getLogger(__name__)
+
 
 
 def accueil(request):
@@ -82,9 +83,27 @@ def menu_commande(request):
     if request.method == 'POST':
         form = CommandeProduitForm(request.POST)
         if form.is_valid():
-            # TODO: récupérer les données sur form.cleaned_data
-            commande = Commande(date=timezone.now())
-            # for f in form.fields:
+
+            id=request.user.id
+            foyer=Foyer.objects.get(id=id)
+            # user=User()
+            # foyer=Foyer(user=user, adresse=foyer.adresse, ville=foyer.ville,
+            # est_une_residence=foyer.est_une_residence, telephone=foyer.telephone,
+            # habitants=foyer.habitants,
+            # informations_appartement=foyer.informations_appartement)
+            produits = Produit.objects.all()
+            produits = [p for p in produits if p.est_disponible]
+            my_products = list()
+            prix_total = 0
+            for i in range(0,len(produits)):
+                if form.cleaned_data[produits[i].nom]:
+                    my_products.append(produits[i])
+                    prix_total = prix_total + produits[i].prix
+
+            commande = Commande(foyer=foyer, date=timezone.now(), prix_total=prix_total, produits=my_products)
+
+
+            commande.save()
 
             return HttpResponseRedirect(reverse('mainsite:bravo'))
 
