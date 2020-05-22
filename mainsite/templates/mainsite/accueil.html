@@ -4,13 +4,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Accueil service de livraison</title>
     <link href="{% static 'Test.css'%}"   rel="stylesheet" type="text/css" media="all" />
 </head>
+
+<div id="SMC" class="container" style="text-align: center"><img src="{% static 'RFr.jpg'%}" width="236" height="243" alt=""/>
+            </div>
+
 <body>
-    <text> hello </text>
-        <a href="/mainsite/signin"> Inscription </a>
-        <b >sansclasse</b>
-        <c > <b>avecclasse</b> </c>
+    <h1> Bienvenue! </h1>
+
+    <p> Veuillez choisir l'option souhaité </p>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="/mainsite/signin"> Inscription </a>
+            </li>
+            <li>
+                <a href="/mainsite/login"> Connection </a>
+            </li>
+        </ul>
+    </nav>
+
 </body>
 </html>
+

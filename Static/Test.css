@@ -1,16 +1,36 @@
-h1, h2, h3
-    {
-        margin: 0;
-        padding: 0;
-        color: #0000ff;
-    }
+h1, h2, h3 {
+    margin: 0;
+    padding-left: 0;
+    border: 0;
+    font-size: 50px;
+    vertical-align: baseline;
+    color: black;
+    text-align: center;
+}
 
-a
-    {
-        color: hotpink;
-    }
+p {
+    color: black;
+}
 
-c b
-{
-    color: blueviolet;
+a{
+    color: white;
+    background-color: blue;
+    text-decoration: none;
+    padding: 20px;
+    text-align: center;
+}
+
+a:hover {
+    color: antiquewhite;
+    background-color: darkblue;
+    transition: 0.5s all;
+}
+
+body {
+    background-color: antiquewhite;
+}
+
+nav ul li {
+    padding-top:  20px;
+    padding-bottom: 20px;
 }
